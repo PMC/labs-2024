@@ -2,6 +2,8 @@
 using MiniProject;
 ProductList list = new ProductList();
 bool keeepRunning = true;
+string searchFor = "";
+
 ConsoleKeyInfo menuInput;
 
 CS.PrintLn(ConsoleColor.Green,"Welcome to Checkpoint 2 solution");
@@ -14,7 +16,9 @@ CS.PrintLn(ConsoleColor.Green, "* Added example Products");
 
 while (keeepRunning)
 {
-    list.Print();
+    list.Print(searchFor);
+    searchFor = ""; //after print, reset search string
+
     PrintMainCommands();
     menuInput = Console.ReadKey();
     Console.WriteLine(); //new line after keypress
@@ -28,8 +32,10 @@ while (keeepRunning)
             keeepRunning = false;
             break;
         case ConsoleKey.P:
-            Console.WriteLine();
             handleNewProduct();
+            break;
+        case ConsoleKey.S:
+            searchFor = handleSearch();
             break;
         default:
             CS.PrintLn(ConsoleColor.Red, "Wrong menu entry, please try again:");
@@ -39,7 +45,12 @@ while (keeepRunning)
     
 }
 
-
+string handleSearch()
+{
+    Console.Clear();
+    Console.Write("Enter a Product Name to search for: ");
+    return readInput();
+}
 
 void handleNewProduct()
 {

@@ -20,8 +20,11 @@ namespace MiniProject
             products.Add(prd);
         }
 
-        internal void Print()
+        internal void Print(string searchText)
         {
+            ConsoleColor color = Console.ForegroundColor;
+            ConsoleColor defaultColor = Console.ForegroundColor;
+
             Console.WriteLine("------------------------------------------------------------");
             CS.PrintLn(ConsoleColor.Green, $"{"Category",-20}{"Product",-20}{"Price",-20}");
 
@@ -30,7 +33,16 @@ namespace MiniProject
             foreach (var item in myProducts)
             {
                 string category = item.Category[0].Name;
-                Console.WriteLine($"{category,-20}{item.Name,-20}{item.Price,-20}");
+                if (!string.IsNullOrEmpty(searchText) && item.Name.Contains(searchText,StringComparison.OrdinalIgnoreCase))
+                {
+                    color = ConsoleColor.Magenta;
+                } 
+                else
+                {
+                    color = defaultColor;
+                }
+
+                CS.PrintLn(color,$"{category,-20}{item.Name,-20}{item.Price,-20}");
             }
             Console.WriteLine();
             decimal amount = products.Sum(x => x.Price);
