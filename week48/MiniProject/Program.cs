@@ -10,8 +10,12 @@ CS.PrintLn(ConsoleColor.Green,"Welcome to Checkpoint 2 solution");
 
 list.AddProduct("Mobile", "Samsung S23", 10000);
 list.AddProduct("Camera", "Sony A7IV", 25000);
+list.AddProduct("Camera", "Apple iPhone 16 5G", 10753);
+list.AddProduct("Router", "ASUS RT-AX86U Pro", 2190);
+list.AddProduct("Camera", "Elgato Cam Link 4K", 999);
 
-CS.PrintLn(ConsoleColor.Green, "* Added example Products");
+
+CS.PrintLn(ConsoleColor.Green, $"* Added [{list.GetProductCount()}] example Products");
 
 
 while (keeepRunning)
@@ -47,9 +51,10 @@ while (keeepRunning)
 
 string handleSearch()
 {
+    CS.Print(ConsoleColor.Green, "Enter a [TEXT] to search for | enter [Q]uit or [RETURN] to abort: ");
+    string input = readInput();
     Console.Clear();
-    Console.Write("Enter a Product Name to search for: ");
-    return readInput();
+    return input;
 }
 
 void handleNewProduct()
@@ -89,6 +94,7 @@ void handleNewProduct()
 
         CS.PrintLn("* Product added");
     }
+    Console.Clear();
 }
 
     void PrintMainCommands()

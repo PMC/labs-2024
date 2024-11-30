@@ -20,11 +20,21 @@ namespace MiniProject
             products.Add(prd);
         }
 
+        //Return number of products in the list
+        internal int GetProductCount()
+        {
+            return products.Count;
+        }
+
         internal void Print(string searchText)
         {
             ConsoleColor color = Console.ForegroundColor;
             ConsoleColor defaultColor = Console.ForegroundColor;
-
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                CS.Print(ConsoleColor.Green, "Searching for: ");
+                CS.PrintLn(searchText);
+            }
             Console.WriteLine("------------------------------------------------------------");
             CS.PrintLn(ConsoleColor.Green, $"{"Category",-20}{"Product",-20}{"Price",-20}");
 
@@ -33,7 +43,8 @@ namespace MiniProject
             foreach (var item in myProducts)
             {
                 string category = item.Category[0].Name;
-                if (!string.IsNullOrEmpty(searchText) && item.Name.Contains(searchText,StringComparison.OrdinalIgnoreCase))
+                if (!string.IsNullOrEmpty(searchText) && (item.Name.Contains(searchText,StringComparison.OrdinalIgnoreCase) 
+                    || item.Category[0].Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)))
                 {
                     color = ConsoleColor.Magenta;
                 } 
