@@ -4,11 +4,11 @@ This repository contains weekly mini projects (labs) developed as part of a cour
 
 ## Sub Labs per week
 
-### Week 48: MiniProject
+## Week 48: MiniProject
 
 This program, implemented in C#, allows users to manage a list of products interactively through a console application. The application provides functionality to add products with attributes like category, name, and price, as well as options to search for products, view the entire product list sorted by price, and calculate the total cost of all products.
 
-### Week 49: AssetTracker
+## Week 49: AssetTracker
 
 AssetTracker is a .NET console application designed to manage and track assets in various office locations. The program fetches live currency conversion rates from an online API to accurately convert asset values from EURO into the desired currencies. This is particularly useful for companies managing assets in multiple currencies and office locations.
 
