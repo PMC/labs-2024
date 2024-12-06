@@ -8,26 +8,32 @@
 
 1. **Office Location Management**:
    - Tracks and organizes assets by their assigned office location.
-   - Supports input and display of detailed asset information.
+   - Supports displaying detailed asset information.
 
 2. **Real-Time Currency Conversion**:
-   - Retrieves live conversion rates from a specified online service.
-   - Converts asset values into different currencies for standardized reporting.
+   - The program makes an API call to retrieve current currency conversion rates.
+   - Conversion rates are utilized to calculate asset values in the desired office target currency.
 
-3. **User-Friendly Interaction**:
-   - Provides clear and concise output for asset value calculations and currency conversion.
+3. **Displaying Assets**:
+   - Displays a list of all tracked assets grouped by office location and expiry date.
+   - Shows original **EURO** and converted values for each asset.
 
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/PMC/labs-2024.git
    ```
+
 2. Navigate to the project directory:
+
    ```bash
    cd labs-2024/week49/AssetTracker
    ```
+
 3. Build the project:
+
    ```bash
    dotnet build
    ```
@@ -37,17 +43,8 @@
 ### Running the Program
 
 To execute the program, run the following command:
+
 ```bash
 dotnet run
 ```
-
-### Key Functionalities
-
-1. **Fetching Conversion Rates**:
-   - The program makes an API call to retrieve current currency conversion rates.
-   - Conversion rates are utilized to calculate asset values in the desired target currency.
-
-2. **Displaying Assets**:
-   - Displays a list of all tracked assets grouped by office location and expiry date.
-   - Shows original and converted values for each asset.
 
