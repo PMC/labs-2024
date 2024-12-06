@@ -1,12 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Diagnostics;
+using System.Drawing;
 using AssetTracker;
 AssetManager manager = new AssetManager();
+LiveCurrency.FetchRates();
 
 generateDefaultAssets(manager);
 
+// since LiveCurrency was a bit broken i assume all items are in EURO, and convert to Office Currency
 
-//manager.GetAssets().OrderBy(item  => item.Office.Name).ToList();
+CS.PrintLn($"{"Type",-20}{"Brand",-20}{"Model",-20}{"Office",-10}{"Date",-12}{"Price EUR",-10}{"Currency",-10}{"Local Price Today",-10}");
 
 foreach (var item in manager.GetAssets()
     .OrderBy(item => item.Office.Name)
@@ -26,7 +29,7 @@ foreach (var item in manager.GetAssets()
         color = ConsoleColor.Yellow;
     }
 
-    CS.PrintLn(color,$"{item.GetType().Name,-20}{item.Brand,-20}{item.Model,-20}{item.Office.Name,-10}{item.PurchaseDate.ToShortDateString(),-12}{item.PurchasePrice.Cost,-10}{monthsLeft,-10}");
+    CS.PrintLn(color,$"{item.GetType().Name,-20}{item.Brand,-20}{item.Model,-20}{item.Office.Name,-10}{item.PurchaseDate.ToShortDateString(),-12}{item.PurchasePrice.Cost,-10}{item.Office.LocalCurrency.ToString(),-10}{LiveCurrency.ConvertToCurrency(item.PurchasePrice.Cost, item.Office.LocalCurrency.ToString()).ToString("F2"),-10}");
 
 }
 
@@ -39,13 +42,13 @@ static void generateDefaultAssets(AssetManager manager)
     manager.AddAsset(new Smartphone(new Price(200, Currency.USD), DateTime.Now.AddMonths(-36 + 4), "Motorola", "X3", "USA"));
     manager.AddAsset(new Smartphone(new Price(400, Currency.USD), DateTime.Now.AddMonths(-36 + 5), "Motorola", "X3", "USA"));
     manager.AddAsset(new Smartphone(new Price(400, Currency.USD), DateTime.Now.AddMonths(-36 + 10), "Motorola", "X2", "USA"));
-    manager.AddAsset(new Smartphone(new Price(4500, Currency.SEK), DateTime.Now.AddMonths(-36 + 6), "Samsung", "Galaxy 10", "Sweden"));
-    manager.AddAsset(new Smartphone(new Price(4500, Currency.SEK), DateTime.Now.AddMonths(-36 + 7), "Samsung", "Galaxy 10", "Sweden"));
-    manager.AddAsset(new Smartphone(new Price(3000, Currency.SEK), DateTime.Now.AddMonths(-36 + 4), "Sony", "XPeria 7", "Sweden"));
-    manager.AddAsset(new Smartphone(new Price(3000, Currency.SEK), DateTime.Now.AddMonths(-36 + 5), "Sony", "XPeria 7", "Sweden"));
+    manager.AddAsset(new Smartphone(new Price(450, Currency.SEK), DateTime.Now.AddMonths(-36 + 6), "Samsung", "Galaxy 10", "Sweden"));
+    manager.AddAsset(new Smartphone(new Price(450, Currency.SEK), DateTime.Now.AddMonths(-36 + 7), "Samsung", "Galaxy 10", "Sweden"));
+    manager.AddAsset(new Smartphone(new Price(300, Currency.SEK), DateTime.Now.AddMonths(-36 + 4), "Sony", "XPeria 7", "Sweden"));
+    manager.AddAsset(new Smartphone(new Price(300, Currency.SEK), DateTime.Now.AddMonths(-36 + 5), "Sony", "XPeria 7", "Sweden"));
     manager.AddAsset(new Smartphone(new Price(220, Currency.EUR), DateTime.Now.AddMonths(-36 + 12), "Siemens", "Brick", "Germany"));
-    manager.AddAsset(new Computer(new Price(100, Currency.USD), DateTime.Now.AddMonths(-38), "Dell", "Desktop 900", "USA"));
-    manager.AddAsset(new Computer(new Price(100, Currency.USD), DateTime.Now.AddMonths(-37), "Dell", "Desktop 900", "USA"));
+    manager.AddAsset(new Computer(new Price(1000, Currency.USD), DateTime.Now.AddMonths(-38), "Dell", "Desktop 900", "USA"));
+    manager.AddAsset(new Computer(new Price(1000, Currency.USD), DateTime.Now.AddMonths(-37), "Dell", "Desktop 900", "USA"));
     manager.AddAsset(new Computer(new Price(300, Currency.USD), DateTime.Now.AddMonths(-36 + 1), "Lenovo", "X100", "USA"));
     manager.AddAsset(new Computer(new Price(300, Currency.USD), DateTime.Now.AddMonths(-36 + 4), "Lenovo", "X200", "USA"));
     manager.AddAsset(new Computer(new Price(500, Currency.USD), DateTime.Now.AddMonths(-36 + 9), "Lenovo", "X300", "USA"));

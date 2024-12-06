@@ -1,4 +1,6 @@
 ﻿
+using AssetTracker;
+
 internal class Computer : Asset
 {
     private Price _purchasePrice;
@@ -9,7 +11,7 @@ internal class Computer : Asset
 
     public Computer(Price purchasePrice, DateTime purchaseDate, string brand, string model, string office)
     {
-        _purchasePrice = purchasePrice;
+        _purchasePrice = new Price(purchasePrice.Cost,Currency.EUR);
         _purchaseDate = purchaseDate;
         _model = model;
         _brand = brand;
