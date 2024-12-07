@@ -1,4 +1,6 @@
 ﻿
+using System.Globalization;
+
 internal abstract class Asset
 {
     private Price _purchasePrice;
@@ -13,7 +15,8 @@ internal abstract class Asset
         _purchaseDate = purchaseDate;
         _model = model;
         _brand = brand;
-        _office = new Office(office, purchasePrice.Currency);
+        TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+        _office = new Office(ti.ToTitleCase(office), purchasePrice.Currency);
     }
 
     public string Brand 
