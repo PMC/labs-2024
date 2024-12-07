@@ -48,6 +48,8 @@ void addNewAsset(AssetManager manager)
     CS.Print("Select 1 or 2: ");
     string type = readInput();
     Asset asset;
+    int days=0;
+
 
     if (type == "1" || type == "2")
     {
@@ -84,13 +86,17 @@ void addNewAsset(AssetManager manager)
                 throw new Exception("Wrong currency selection");
 
         }
+        CS.Print("Enter how many days old the Asset is: ");
+        string daysInput = readInput();
+
+        int.TryParse(daysInput, out days);
         if (type.Equals("1"))
         {
-            manager.AddAsset(new Smartphone(new Price(value, officeCurrency), DateTime.Now.AddMonths(-36), brand, model, location));
+            manager.AddAsset(new Smartphone(new Price(value, officeCurrency), DateTime.Now.AddDays(0 - days), brand, model, location));
         }
         else
         {
-            manager.AddAsset(new Computer(new Price(value, officeCurrency), DateTime.Now.AddMonths(-36), brand, model, location));
+            manager.AddAsset(new Computer(new Price(value, officeCurrency), DateTime.Now.AddMonths(0 - days), brand, model, location));
 
         }
     }
